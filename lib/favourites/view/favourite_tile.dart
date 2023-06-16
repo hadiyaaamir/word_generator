@@ -23,11 +23,8 @@ class FavouriteTile extends StatelessWidget {
             onTap: () {
               context.read<WordController>().removeWord(word);
             },
-            child: Icon(
-              Icons.delete,
-              color: Theme.of(context).colorScheme.primary,
-              size: 20,
-            ),
+            child: Icon(Icons.delete,
+                color: Theme.of(context).colorScheme.primary, size: 20),
           ),
         ),
       ),

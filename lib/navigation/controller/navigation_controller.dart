@@ -12,21 +12,7 @@ class NavigationController extends ChangeNotifier {
     AppPage.home(),
     AppPage.liked(),
   ];
-
-  List<NavigationRailDestination> get destinations {
-    List<NavigationRailDestination> list = [];
-
-    for (AppPage page in _pages) {
-      list.add(
-        NavigationRailDestination(
-          icon: Icon(page.icon),
-          label: Text(page.label),
-        ),
-      );
-    }
-
-    return list;
-  }
+  List<AppPage> get pages => _pages;
 
   Widget get currentPage {
     if (selectedIndex < _pages.length) {

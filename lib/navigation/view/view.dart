@@ -4,3 +4,5 @@ import 'package:word_generator/navigation/navigation.dart';
 
 part 'navigation_rail.dart';
 part 'navigable_screen.dart';
+part 'navigation_bottom_bar.dart';
+part 'navigable_view.dart';
