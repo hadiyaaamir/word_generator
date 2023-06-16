@@ -14,12 +14,15 @@ class WordTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: Text(
-                word.word.asLowerCase,
-                style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                semanticsLabel: '${word.word.first} ${word.word.second}',
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 500),
+                child: Text(
+                  word.word.asLowerCase,
+                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                  semanticsLabel: '${word.word.first} ${word.word.second}',
+                ),
               ),
             ),
             Positioned(
