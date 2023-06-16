@@ -3,18 +3,20 @@ part of 'view.dart';
 class WordApp extends StatelessWidget {
   const WordApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WordController(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WordController()),
+        ChangeNotifierProvider(create: (context) => NavigationController()),
+      ],
       child: MaterialApp(
         title: 'Word Generator',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: kSeedColor),
           useMaterial3: true,
         ),
-        home: const WordScreen(),
+        home: const NavigableScreen(),
       ),
     );
   }
