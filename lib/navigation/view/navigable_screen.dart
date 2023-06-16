@@ -13,14 +13,22 @@ class _NavigableScreenState extends State<NavigableScreen> {
     NavigationController navigationController =
         context.watch<NavigationController>();
 
-    return Scaffold(
-        body: Row(
-      children: [
-        const SafeArea(child: MyNavigationRail()),
-        Expanded(
-          child: navigationController.currentPage,
-        ),
-      ],
-    ));
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        context.read<NavigationController>().maxWidth = constraints.maxWidth;
+        return Scaffold(
+          body: Row(
+            children: [
+              const SafeArea(
+                child: MyNavigationRail(),
+              ),
+              Expanded(
+                child: navigationController.currentPage,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
