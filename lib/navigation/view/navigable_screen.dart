@@ -15,12 +15,13 @@ class _NavigableScreenState extends State<NavigableScreen> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        context.read<NavigationController>().maxWidth = constraints.maxWidth;
         return Scaffold(
           body: Row(
             children: [
-              const SafeArea(
-                child: MyNavigationRail(),
+              SafeArea(
+                child: MyNavigationRail(
+                  extended: constraints.maxWidth >= 600,
+                ),
               ),
               Expanded(
                 child: navigationController.currentPage,
