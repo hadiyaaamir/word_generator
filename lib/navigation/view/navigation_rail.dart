@@ -1,7 +1,9 @@
 part of 'view.dart';
 
 class MyNavigationRail extends StatefulWidget {
-  const MyNavigationRail({super.key});
+  const MyNavigationRail({super.key, this.extended = false});
+
+  final bool extended;
 
   @override
   State<MyNavigationRail> createState() => _MyNavigationRailState();
@@ -16,7 +18,7 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
         context.watch<NavigationController>();
 
     return NavigationRail(
-      extended: navigationController.extended,
+      extended: widget.extended,
       selectedIndex: navigationController.selectedIndex,
       backgroundColor: colorScheme.primaryContainer,
       indicatorColor: colorScheme.primary,
