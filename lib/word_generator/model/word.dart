@@ -15,6 +15,8 @@ class Word {
 
   Word toggleFav() => copyWith(isFav: !isFav);
 
+  Word switchAround() => copyWith(word: WordPair(word.second, word.first));
+
   @override
   String toString() {
     return '$word';
