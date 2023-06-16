@@ -3,7 +3,7 @@ part of 'view.dart';
 class FavouriteTile extends StatelessWidget {
   const FavouriteTile({super.key, required this.word});
 
-  final WordPair word;
+  final Word word;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class FavouriteTile extends StatelessWidget {
           ),
           trailing: GestureDetector(
             onTap: () {
-              context.read<WordController>().removeWord(word);
+              context.read<WordController>().toggleFavourite(word);
             },
             child: Icon(Icons.delete,
                 color: Theme.of(context).colorScheme.primary, size: 20),

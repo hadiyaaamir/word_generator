@@ -10,7 +10,8 @@ class WordScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          WordTile(word: wordController.current),
+          Expanded(flex: 4, child: WordsList()),
+          WordTile(),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -25,6 +26,7 @@ class WordScreen extends StatelessWidget {
               ),
             ],
           ),
+          const Spacer(flex: 3),
         ],
       ),
     );

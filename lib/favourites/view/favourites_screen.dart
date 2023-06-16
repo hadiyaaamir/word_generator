@@ -5,7 +5,7 @@ class FavouritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<WordPair> favs = context.watch<WordController>().favourites;
+    List<Word> favs = context.watch<WordController>().favourites;
 
     return favs.isEmpty
         ? const Center(child: Text('No favourites added'))
