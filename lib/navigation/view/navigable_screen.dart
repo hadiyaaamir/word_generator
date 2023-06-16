@@ -10,23 +10,13 @@ class NavigableScreen extends StatefulWidget {
 class _NavigableScreenState extends State<NavigableScreen> {
   @override
   Widget build(BuildContext context) {
-    NavigationController navigationController =
-        context.watch<NavigationController>();
-
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          body: Row(
-            children: [
-              SafeArea(
-                child: MyNavigationRail(
-                  extended: constraints.maxWidth >= 600,
-                ),
-              ),
-              Expanded(
-                child: navigationController.currentPage,
-              ),
-            ],
+          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          body: NavigableView(
+            extended: constraints.maxWidth >= 600,
+            bottomBar: constraints.maxWidth < 450,
           ),
         );
       },
