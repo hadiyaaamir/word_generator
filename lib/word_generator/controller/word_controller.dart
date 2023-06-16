@@ -28,7 +28,11 @@ class WordController extends ChangeNotifier {
     if (index != -1) {
       _words[index] = word.toggleFav();
     }
+    notifyListeners();
+  }
 
+  void switchWord() {
+    current = current.switchAround();
     notifyListeners();
   }
 }
