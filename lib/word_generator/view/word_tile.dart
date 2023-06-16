@@ -6,7 +6,7 @@ class WordTile extends StatelessWidget {
     required this.word,
   });
 
-  final WordPair word;
+  final Word word;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class WordTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
         child: Text(
-          word.asLowerCase,
+          word.word.asLowerCase,
           style: Theme.of(context).textTheme.displaySmall!.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
-          semanticsLabel: '${word.first} ${word.second}',
+          semanticsLabel: '${word.word.first} ${word.word.second}',
         ),
       ),
     );

@@ -11,11 +11,11 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     WordController wordController = context.watch<WordController>();
-    bool isFav = wordController.isFav;
+    bool isFav = wordController.isCurrentFav;
 
     return ElevatedButton.icon(
         onPressed: () {
-          context.read<WordController>().toggleFavourites();
+          context.read<WordController>().toggleCurrentFavourite();
         },
         icon: AnimatedSwitcher(
           duration: const Duration(milliseconds: 400),
