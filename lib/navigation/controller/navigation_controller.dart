@@ -34,4 +34,12 @@ class NavigationController extends ChangeNotifier {
     }
     return const Placeholder();
   }
+
+  double _maxWidth = 0;
+  set maxWidth(double maxWidth) {
+    _maxWidth = maxWidth;
+    notifyListeners();
+  }
+
+  bool get extended => _maxWidth >= 600;
 }

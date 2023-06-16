@@ -16,13 +16,14 @@ class _MyNavigationRailState extends State<MyNavigationRail> {
         context.watch<NavigationController>();
 
     return NavigationRail(
-        selectedIndex: navigationController.selectedIndex,
-        backgroundColor: colorScheme.primaryContainer,
-        indicatorColor: colorScheme.primary,
-        selectedIconTheme: IconThemeData(color: colorScheme.onPrimary),
-        labelType: NavigationRailLabelType.all,
-        destinations: navigationController.destinations,
-        onDestinationSelected: (int index) =>
-            context.read<NavigationController>().selectedIndex = index);
+      extended: navigationController.extended,
+      selectedIndex: navigationController.selectedIndex,
+      backgroundColor: colorScheme.primaryContainer,
+      indicatorColor: colorScheme.primary,
+      selectedIconTheme: IconThemeData(color: colorScheme.onPrimary),
+      destinations: navigationController.destinations,
+      onDestinationSelected: (int index) =>
+          context.read<NavigationController>().selectedIndex = index,
+    );
   }
 }
