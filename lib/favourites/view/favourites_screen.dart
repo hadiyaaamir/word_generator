@@ -6,14 +6,17 @@ class FavouritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<WordPair> favs = context.watch<WordController>().favourites;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: ListView.builder(
-        itemCount: favs.length,
-        itemBuilder: (BuildContext context, int index) {
-          return FavouriteTile(word: favs[index]);
-        },
-      ),
-    );
+
+    return favs.isEmpty
+        ? const Center(child: Text('No favourites added'))
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+            child: ListView.builder(
+              itemCount: favs.length,
+              itemBuilder: (BuildContext context, int index) {
+                return FavouriteTile(word: favs[index]);
+              },
+            ),
+          );
   }
 }

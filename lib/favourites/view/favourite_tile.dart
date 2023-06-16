@@ -12,11 +12,10 @@ class FavouriteTile extends StatelessWidget {
       child: Card(
         child: ListTile(
           contentPadding:
-              const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
           title: Text(
             word.toString(),
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
       ),
