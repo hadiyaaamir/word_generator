@@ -5,7 +5,7 @@ class WordController extends ChangeNotifier {
   set current(Word word) => _words[_words.length - 1] = word;
 
   final List<Word> _words = [Word(word: WordPair.random())];
-  List<Word> get words => _words;
+  List<Word> get words => _words.sublist(0, _words.length - 1);
 
   List<Word> get favourites => _words.where((word) => word.isFav).toList();
 
