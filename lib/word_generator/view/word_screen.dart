@@ -5,13 +5,26 @@ class WordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<WordController>();
-
-    return Scaffold(
-      body: Column(
+    WordController wordController = context.watch<WordController>();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('A random idea:'),
-          Text(appState.current.asLowerCase),
+          WordTile(word: wordController.current),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const LikeButton(),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  wordController.getNext();
+                },
+                child: const Text('Next Word'),
+              ),
+            ],
+          ),
         ],
       ),
     );
