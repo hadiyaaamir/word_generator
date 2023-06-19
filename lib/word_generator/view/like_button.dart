@@ -11,7 +11,7 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     WordController wordController = context.watch<WordController>();
-    bool isFav = wordController.isCurrentFav;
+    bool isFav = wordController.isCurrentFavourite;
 
     return ElevatedButton.icon(
         onPressed: () {

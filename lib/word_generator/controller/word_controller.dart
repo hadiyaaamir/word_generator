@@ -9,39 +9,49 @@ class WordController extends ChangeNotifier {
   final List<Word> _words = [Word(word: WordPair.random())];
   List<Word> get words => _words.sublist(1);
 
-  List<Word> get favourites => _words.where((word) => word.isFav).toList();
+  List<Word> get favourites =>
+      _words.where((word) => word.isFavourite).toList();
 
-  bool get isCurrentFav => isFav(current);
+  bool get isCurrentFavourite => isFav(current);
 
-  bool isFav(Word word) => word.isFav;
+  bool isFav(Word word) => word.isFavourite;
 
   GlobalKey? wordListKey;
 
   void getNext() {
-    _words.insert(_currentIndex, Word(word: WordPair.random()));
+    WordPair currentWord = WordPair.random();
 
-    AnimatedListState? animatedList =
-        wordListKey?.currentState as AnimatedListState?;
-    animatedList?.insertItem(_currentIndex);
+    _words.insert(_currentIndex, Word(word: currentWord));
+    _addToAnimatedList();
 
     notifyListeners();
   }
 
+  void _addToAnimatedList() {
+    AnimatedListState? animatedList =
+        wordListKey?.currentState as AnimatedListState?;
+    animatedList?.insertItem(_currentIndex);
+  }
+
   void toggleCurrentFavourite() {
-    current = current.toggleFav();
+    current = current.toggleFavourite();
     notifyListeners();
   }
 
   void toggleFavourite(Word word) {
     int index = _words.indexOf(word);
     if (index != -1) {
-      _words[index] = word.toggleFav();
+      _words[index] = word.toggleFavourite();
     }
     notifyListeners();
   }
 
-  void switchWord() {
-    current = current.switchAround();
+  void swapWords() {
+    if (!current.isSwitched) {
+      _addToAnimatedList();
+      _words.insert(_currentIndex, current);
+      current = current.swapWords();
+    }
     notifyListeners();
   }
 }
