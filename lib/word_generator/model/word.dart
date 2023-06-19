@@ -23,6 +23,7 @@ class Word {
   Word swapWords() => copyWith(
         word: WordPair(word.second, word.first),
         isSwitched: !isSwitched,
+        isFavourite: false,
       );
 
   @override

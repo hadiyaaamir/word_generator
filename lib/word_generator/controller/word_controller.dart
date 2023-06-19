@@ -19,13 +19,18 @@ class WordController extends ChangeNotifier {
   GlobalKey? wordListKey;
 
   void getNext() {
-    _words.insert(_currentIndex, Word(word: WordPair.random()));
+    WordPair currentWord = WordPair.random();
 
+    _words.insert(_currentIndex, Word(word: currentWord));
+    _addToAnimatedList();
+
+    notifyListeners();
+  }
+
+  void _addToAnimatedList() {
     AnimatedListState? animatedList =
         wordListKey?.currentState as AnimatedListState?;
     animatedList?.insertItem(_currentIndex);
-
-    notifyListeners();
   }
 
   void toggleCurrentFavourite() {
@@ -42,7 +47,11 @@ class WordController extends ChangeNotifier {
   }
 
   void swapWords() {
-    current = current.swapWords();
+    if (!current.isSwitched) {
+      _addToAnimatedList();
+      _words.insert(_currentIndex, current);
+      current = current.swapWords();
+    }
     notifyListeners();
   }
 }
