@@ -6,9 +6,10 @@ class WordTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Word word = context.watch<WordController>().current;
+    var colorScheme = Theme.of(context).colorScheme;
     return GestureDetector(
       child: Card(
-        color: Theme.of(context).colorScheme.primary,
+        color: colorScheme.primary,
         elevation: 3,
         child: Stack(
           children: [
@@ -28,13 +29,26 @@ class WordTile extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
+                  child: Wrap(
                     key: Key('${word.isSwitched}'),
-                    word.word.asLowerCase,
-                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                        ),
-                    semanticsLabel: '${word.word.first} ${word.word.second}',
+                    children: [
+                      Text(
+                        word.word.first.toLowerCase(),
+                        style:
+                            Theme.of(context).textTheme.displaySmall!.copyWith(
+                                  color: colorScheme.primaryContainer,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                      ),
+                      Text(
+                        word.word.second.toLowerCase(),
+                        style:
+                            Theme.of(context).textTheme.displaySmall!.copyWith(
+                                  color: colorScheme.onPrimary,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -45,11 +59,8 @@ class WordTile extends StatelessWidget {
                 onPressed: () {
                   context.read<WordController>().switchWord();
                 },
-                icon: Icon(
-                  Icons.swap_horiz,
-                  size: 17,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                icon: Icon(Icons.swap_horiz,
+                    size: 17, color: colorScheme.onPrimary),
               ),
             ),
           ],
