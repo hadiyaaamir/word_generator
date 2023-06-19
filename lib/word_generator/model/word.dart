@@ -4,23 +4,23 @@ part of 'model.dart';
 class Word {
   const Word({
     required this.word,
-    this.isFav = false,
+    this.isFavourite = false,
     this.isSwitched = false,
   });
 
   final WordPair word;
-  final bool isFav;
+  final bool isFavourite;
   final bool isSwitched;
 
-  Word copyWith({WordPair? word, bool? isFav, bool? isSwitched}) => Word(
+  Word copyWith({WordPair? word, bool? isFavourite, bool? isSwitched}) => Word(
         word: word ?? this.word,
-        isFav: isFav ?? this.isFav,
+        isFavourite: isFavourite ?? this.isFavourite,
         isSwitched: isSwitched ?? this.isSwitched,
       );
 
-  Word toggleFav() => copyWith(isFav: !isFav);
+  Word toggleFavourite() => copyWith(isFavourite: !isFavourite);
 
-  Word switchAround() => copyWith(
+  Word swapWords() => copyWith(
         word: WordPair(word.second, word.first),
         isSwitched: !isSwitched,
       );

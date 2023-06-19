@@ -11,7 +11,7 @@ class SmallWordTile extends StatelessWidget {
       child: TextButton.icon(
         icon: AnimatedSwitcher(
           duration: const Duration(milliseconds: 400),
-          child: word.isFav
+          child: word.isFavourite
               ? const Icon(key: Key("favourite"), Icons.favorite, size: 10)
               : Container(key: const Key("not favourite")),
         ),

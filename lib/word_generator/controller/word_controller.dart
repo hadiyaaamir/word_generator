@@ -9,11 +9,12 @@ class WordController extends ChangeNotifier {
   final List<Word> _words = [Word(word: WordPair.random())];
   List<Word> get words => _words.sublist(1);
 
-  List<Word> get favourites => _words.where((word) => word.isFav).toList();
+  List<Word> get favourites =>
+      _words.where((word) => word.isFavourite).toList();
 
-  bool get isCurrentFav => isFav(current);
+  bool get isCurrentFavourite => isFav(current);
 
-  bool isFav(Word word) => word.isFav;
+  bool isFav(Word word) => word.isFavourite;
 
   GlobalKey? wordListKey;
 
@@ -28,20 +29,20 @@ class WordController extends ChangeNotifier {
   }
 
   void toggleCurrentFavourite() {
-    current = current.toggleFav();
+    current = current.toggleFavourite();
     notifyListeners();
   }
 
   void toggleFavourite(Word word) {
     int index = _words.indexOf(word);
     if (index != -1) {
-      _words[index] = word.toggleFav();
+      _words[index] = word.toggleFavourite();
     }
     notifyListeners();
   }
 
-  void switchWord() {
-    current = current.switchAround();
+  void swapWords() {
+    current = current.swapWords();
     notifyListeners();
   }
 }

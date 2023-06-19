@@ -57,7 +57,7 @@ class WordTile extends StatelessWidget {
               right: 0,
               child: IconButton(
                 onPressed: () {
-                  context.read<WordController>().switchWord();
+                  context.read<WordController>().swapWords();
                 },
                 icon: Icon(Icons.swap_horiz,
                     size: 17, color: colorScheme.onPrimary),
