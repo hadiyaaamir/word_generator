@@ -16,19 +16,35 @@ class WordTile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
               child: AnimatedSize(
                 duration: const Duration(milliseconds: 500),
-                child: Text(
-                  word.word.asLowerCase,
-                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: FadeTransition(
+                        opacity: animation,
+                        child: child,
                       ),
-                  semanticsLabel: '${word.word.first} ${word.word.second}',
+                    );
+                  },
+                  child: Text(
+                    key: Key('${word.isSwitched}'),
+                    word.word.asLowerCase,
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                    semanticsLabel: '${word.word.first} ${word.word.second}',
+                  ),
                 ),
               ),
             ),
             Positioned(
               right: 0,
               child: IconButton(
-                onPressed: () => context.read<WordController>().switchWord(),
+                onPressed: () {
+                  context.read<WordController>().switchWord();
+                },
                 icon: Icon(
                   Icons.swap_horiz,
                   size: 17,
