@@ -13,8 +13,15 @@ class WordController extends ChangeNotifier {
 
   bool isFav(Word word) => word.isFav;
 
+  GlobalKey? wordListKey;
+
   void getNext() {
     _words.add(Word(word: WordPair.random()));
+
+    AnimatedListState? animatedList =
+        wordListKey?.currentState as AnimatedListState?;
+    animatedList?.insertItem(words.length - 1);
+
     notifyListeners();
   }
 
