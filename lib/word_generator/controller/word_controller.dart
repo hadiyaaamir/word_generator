@@ -1,11 +1,13 @@
 part of 'controller.dart';
 
 class WordController extends ChangeNotifier {
-  Word get current => _words[_words.length - 1];
-  set current(Word word) => _words[_words.length - 1] = word;
+  final int _currentIndex = 0;
+
+  Word get current => _words[_currentIndex];
+  set current(Word word) => _words[_currentIndex] = word;
 
   final List<Word> _words = [Word(word: WordPair.random())];
-  List<Word> get words => _words.sublist(0, _words.length - 1);
+  List<Word> get words => _words.sublist(1);
 
   List<Word> get favourites => _words.where((word) => word.isFav).toList();
 
@@ -16,11 +18,11 @@ class WordController extends ChangeNotifier {
   GlobalKey? wordListKey;
 
   void getNext() {
-    _words.add(Word(word: WordPair.random()));
+    _words.insert(_currentIndex, Word(word: WordPair.random()));
 
     AnimatedListState? animatedList =
         wordListKey?.currentState as AnimatedListState?;
-    animatedList?.insertItem(words.length - 1);
+    animatedList?.insertItem(_currentIndex);
 
     notifyListeners();
   }
