@@ -17,20 +17,30 @@ class WordController extends ChangeNotifier {
   bool isFav(Word word) => word.isFavourite;
 
   GlobalKey? wordListKey;
+  GlobalKey? favouriteListKey;
 
   void getNext() {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
-    _addToAnimatedList();
+    _addToWordsAnimatedList();
 
     notifyListeners();
   }
 
-  void _addToAnimatedList() {
+  void _addToWordsAnimatedList() {
     AnimatedListState? animatedList =
         wordListKey?.currentState as AnimatedListState?;
     animatedList?.insertItem(_currentIndex);
+  }
+
+  void _removeFromFavouritesAnimatedList(int index) {
+    AnimatedListState? animatedList =
+        favouriteListKey?.currentState as AnimatedListState?;
+    animatedList?.removeItem(index, (_, animation) {
+      return SizeTransition(
+          sizeFactor: animation, child: const TemporaryDeletionTile());
+    }, duration: const Duration(milliseconds: 300));
   }
 
   void toggleCurrentFavourite() {
@@ -41,14 +51,25 @@ class WordController extends ChangeNotifier {
   void toggleFavourite(Word word) {
     int index = _words.indexOf(word);
     if (index != -1) {
+      if (_words[index].isFavourite) _removeFavourites(word);
       _words[index] = word.toggleFavourite();
     }
     notifyListeners();
   }
 
+  void _removeFavourites(Word word) {
+    List favouriteWord =
+        favourites.where((element) => element.word == word.word).toList();
+
+    if (favouriteWord.isNotEmpty) {
+      int favouriteIndex = favourites.indexOf(favouriteWord.first);
+      _removeFromFavouritesAnimatedList(favouriteIndex);
+    }
+  }
+
   void swapWords() {
     if (!current.isSwitched) {
-      _addToAnimatedList();
+      _addToWordsAnimatedList();
       _words.insert(_currentIndex, current);
       current = current.swapWords();
     }
