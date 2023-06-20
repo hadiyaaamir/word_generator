@@ -18,7 +18,10 @@ class NavigableView extends StatelessWidget {
         ? Column(
             children: [
               Expanded(
-                child: navigationController.currentPage,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: navigationController.currentPage,
+                ),
               ),
               const MyNavigationBottomBar(),
             ],
