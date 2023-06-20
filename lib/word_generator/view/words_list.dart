@@ -15,7 +15,7 @@ class _WordsListState extends State<WordsList> {
     final WordController wordController = context.watch<WordController>();
     wordController.wordListKey = _listKey;
 
-    List<Word> words = wordController.words;
+    List<Word> words = wordController.previousWords;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
