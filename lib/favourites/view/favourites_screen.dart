@@ -10,7 +10,7 @@ class FavouritesScreen extends StatelessWidget {
     return favs.isEmpty
         ? const Center(child: Text('No favourites added'))
         : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: ListView.builder(
               itemCount: favs.length,
               itemBuilder: (BuildContext context, int index) {

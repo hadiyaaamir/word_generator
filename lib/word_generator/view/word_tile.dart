@@ -36,7 +36,7 @@ class WordTile extends StatelessWidget {
                         word.word.first.toLowerCase(),
                         style:
                             Theme.of(context).textTheme.displaySmall!.copyWith(
-                                  color: colorScheme.primaryContainer,
+                                  color: colorScheme.onPrimary,
                                   fontWeight: FontWeight.w300,
                                 ),
                       ),
