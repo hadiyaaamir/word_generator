@@ -9,12 +9,10 @@ class SmallWordTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton.icon(
-        icon: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 400),
-          child: word.isFavourite
-              ? const Icon(key: Key("favourite"), Icons.favorite, size: 10)
-              : Container(key: const Key("not favourite")),
-        ),
+        icon: word.isFavourite
+            ? Icon(
+                key: ValueKey('${word.isFavourite}'), Icons.favorite, size: 10)
+            : Container(key: ValueKey('${word.isFavourite}')),
         label: Text(word.toString()),
         onPressed: () {
           context.read<WordController>().toggleFavourite(word);
