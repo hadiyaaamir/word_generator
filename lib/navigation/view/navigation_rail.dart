@@ -1,7 +1,7 @@
 part of 'view.dart';
 
-class MyNavigationRail extends StatefulWidget {
-  const MyNavigationRail({
+class CustomNavigationRail extends StatefulWidget {
+  const CustomNavigationRail({
     super.key,
     this.extended = false,
   });
@@ -9,10 +9,10 @@ class MyNavigationRail extends StatefulWidget {
   final bool extended;
 
   @override
-  State<MyNavigationRail> createState() => _MyNavigationRailState();
+  State<CustomNavigationRail> createState() => _CustomNavigationRailState();
 }
 
-class _MyNavigationRailState extends State<MyNavigationRail> {
+class _CustomNavigationRailState extends State<CustomNavigationRail> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
