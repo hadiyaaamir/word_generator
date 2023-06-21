@@ -1,15 +1,15 @@
 part of 'view.dart';
 
-class MyNavigationBottomBar extends StatefulWidget {
-  const MyNavigationBottomBar({
+class NavigationBottomBar extends StatefulWidget {
+  const NavigationBottomBar({
     super.key,
   });
 
   @override
-  State<MyNavigationBottomBar> createState() => _MyNavigationBottomBarState();
+  State<NavigationBottomBar> createState() => _NavigationBottomBarState();
 }
 
-class _MyNavigationBottomBarState extends State<MyNavigationBottomBar> {
+class _NavigationBottomBarState extends State<NavigationBottomBar> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;

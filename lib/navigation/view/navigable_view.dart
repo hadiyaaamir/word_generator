@@ -23,13 +23,13 @@ class NavigableView extends StatelessWidget {
                   child: navigationController.currentPage,
                 ),
               ),
-              const MyNavigationBottomBar(),
+              const NavigationBottomBar(),
             ],
           )
         : Row(
             children: [
               SafeArea(
-                child: MyNavigationRail(extended: extended),
+                child: CustomNavigationRail(extended: extended),
               ),
               Expanded(
                 child: navigationController.currentPage,
