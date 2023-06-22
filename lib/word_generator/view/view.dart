@@ -8,3 +8,4 @@ part 'word_screen.dart';
 part 'words_list.dart';
 part 'small_word_tile.dart';
 part 'buttons_row.dart';
+part 'word_screen_alternate.dart';
