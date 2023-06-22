@@ -12,7 +12,7 @@ class AppPage {
   final IconData icon;
 
   factory AppPage.home() =>
-      AppPage(page: const WordScreen(), label: 'Home', icon: Icons.home);
+      AppPage(page: WordScreen(), label: 'Home', icon: Icons.home);
 
   factory AppPage.liked() => AppPage(
       page: const FavouritesScreen(), label: 'Liked', icon: Icons.favorite);

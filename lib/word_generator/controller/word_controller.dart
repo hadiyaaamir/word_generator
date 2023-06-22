@@ -29,8 +29,8 @@ class WordController extends ChangeNotifier {
   }
 
   void _addToWordsAnimatedList() {
-    AnimatedListState? animatedList =
-        wordListKey?.currentState as AnimatedListState?;
+    SliverAnimatedListState? animatedList =
+        wordListKey?.currentState as SliverAnimatedListState?;
     animatedList?.insertItem(_currentIndex);
   }
 

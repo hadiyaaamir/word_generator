@@ -1,34 +1,92 @@
 part of 'view.dart';
 
-class WordScreen extends StatelessWidget {
+class WordScreen extends StatefulWidget {
   const WordScreen({super.key});
+
+  @override
+  State<WordScreen> createState() => _WordScreenState();
+}
+
+class _WordScreenState extends State<WordScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.minScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     WordController wordController = context.watch<WordController>();
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(flex: 4, child: WordsList()),
-          const WordTile(),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const LikeButton(),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  wordController.getNext();
+    wordController.wordListKey = _listKey;
+
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return CustomScrollView(
+      controller: _scrollController,
+      reverse: true,
+      slivers: [
+        SliverAppBar(
+          backgroundColor: colorScheme.surfaceVariant,
+          expandedHeight: MediaQuery.of(context).size.height / 2,
+          pinned: true,
+          snap: true,
+          floating: true,
+          flexibleSpace: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              final bool isCollapsed = constraints.maxHeight <=
+                  kToolbarHeight +
+                      (MediaQuery.of(context).padding.top) +
+                      (MediaQuery.of(context).size.height / 6);
+
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 750),
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: SizeTransition(
+                      sizeFactor: animation,
+                      child: child,
+                    ),
+                  );
                 },
-                child: const Text('Next Word'),
-              ),
-            ],
+                child: isCollapsed
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                            onPressed: _scrollDown,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: colorScheme.primary,
+                              foregroundColor: colorScheme.onPrimary,
+                            ),
+                            child: const Text('Generate Word')),
+                      )
+                    : const FlexibleSpaceBar(
+                        background: Column(
+                          children: [
+                            WordTile(),
+                            SizedBox(height: 10),
+                            ButtonsRow(),
+                          ],
+                        ),
+                      ),
+              );
+            },
           ),
-          const Spacer(flex: 3),
-        ],
-      ),
+        ),
+        const WordsList(),
+      ],
     );
   }
 }
