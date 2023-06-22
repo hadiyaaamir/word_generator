@@ -32,7 +32,10 @@ class NavigableView extends StatelessWidget {
                 child: CustomNavigationRail(extended: extended),
               ),
               Expanded(
-                child: navigationController.currentPage,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: navigationController.currentPage,
+                ),
               ),
             ],
           );
