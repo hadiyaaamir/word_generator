@@ -1,8 +1,13 @@
 part of 'view.dart';
 
-class WordScreen extends StatelessWidget {
-  WordScreen({super.key});
+class WordScreen extends StatefulWidget {
+  const WordScreen({super.key});
 
+  @override
+  State<WordScreen> createState() => _WordScreenState();
+}
+
+class _WordScreenState extends State<WordScreen> {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollDown() {
@@ -14,6 +19,12 @@ class WordScreen extends StatelessWidget {
   }
 
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +66,7 @@ class WordScreen extends StatelessWidget {
             },
           ),
         ),
-
-        WordsList(),
-
-        // SliverList(
-        //   delegate: SliverChildBuilderDelegate(
-        //     (context, index) {
-        //       return SmallWordTile(word: wordController.previousWords[index]);
-        //     },
-        //     childCount: wordController.previousWords.length,
-        //   ),
-        // ),
+        const WordsList(),
       ],
     );
   }

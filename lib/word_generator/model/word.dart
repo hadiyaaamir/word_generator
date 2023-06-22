@@ -28,6 +28,6 @@ class Word {
 
   @override
   String toString() {
-    return '$word';
+    return word.asLowerCase;
   }
 }
