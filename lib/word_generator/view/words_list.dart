@@ -8,7 +8,8 @@ class WordsList extends StatefulWidget {
 }
 
 class _WordsListState extends State<WordsList> {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  final GlobalKey<SliverAnimatedListState> _listKey =
+      GlobalKey<SliverAnimatedListState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,33 +18,19 @@ class _WordsListState extends State<WordsList> {
 
     List<Word> words = wordController.previousWords;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child:
-
-          // SliverAnimatedList(
-          //   key: _listKey,
-          //   // reverse: true,
-          //   initialItemCount: words.length,
-          //   itemBuilder: (context, index, animation) {
-          //     return SizeTransition(
-          //       sizeFactor: animation,
-          //       child: SmallWordTile(word: words[index]),
-          //     );
-          //   },
-          // ),
-
-          AnimatedList(
-        key: _listKey,
-        reverse: true,
-        initialItemCount: words.length,
-        itemBuilder: (context, index, animation) {
-          return SizeTransition(
-            sizeFactor: animation,
-            child: SmallWordTile(word: words[index]),
-          );
-        },
-      ),
+    return SliverAnimatedList(
+      key: _listKey,
+      // reverse: true,
+      initialItemCount: words.length,
+      itemBuilder: (context, index, animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          child: SmallWordTile(
+            word: words[index],
+            key: Key('${words[index].word}'),
+          ),
+        );
+      },
     );
   }
 }

@@ -56,16 +56,16 @@ class WordScreen extends StatelessWidget {
           ),
         ),
 
-        // WordsList(),
+        WordsList(),
 
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return SmallWordTile(word: wordController.previousWords[index]);
-            },
-            childCount: wordController.previousWords.length,
-          ),
-        ),
+        // SliverList(
+        //   delegate: SliverChildBuilderDelegate(
+        //     (context, index) {
+        //       return SmallWordTile(word: wordController.previousWords[index]);
+        //     },
+        //     childCount: wordController.previousWords.length,
+        //   ),
+        // ),
       ],
     );
   }
