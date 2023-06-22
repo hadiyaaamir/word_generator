@@ -19,7 +19,21 @@ class _WordsListState extends State<WordsList> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: AnimatedList(
+      child:
+
+          // SliverAnimatedList(
+          //   key: _listKey,
+          //   // reverse: true,
+          //   initialItemCount: words.length,
+          //   itemBuilder: (context, index, animation) {
+          //     return SizeTransition(
+          //       sizeFactor: animation,
+          //       child: SmallWordTile(word: words[index]),
+          //     );
+          //   },
+          // ),
+
+          AnimatedList(
         key: _listKey,
         reverse: true,
         initialItemCount: words.length,

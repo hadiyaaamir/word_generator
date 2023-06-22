@@ -13,9 +13,12 @@ class WordScreen extends StatelessWidget {
     );
   }
 
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
   @override
   Widget build(BuildContext context) {
     WordController wordController = context.watch<WordController>();
+    wordController.wordListKey = _listKey;
 
     return CustomScrollView(
       controller: _scrollController,
@@ -30,7 +33,7 @@ class WordScreen extends StatelessWidget {
           flexibleSpace: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               final bool isCollapsed = constraints.maxHeight <=
-                  kToolbarHeight + (MediaQuery.of(context).padding.top + 100);
+                  kToolbarHeight + (MediaQuery.of(context).padding.top);
 
               return isCollapsed
                   ? Align(
@@ -40,16 +43,21 @@ class WordScreen extends StatelessWidget {
                         child: const Text('Generate Word'),
                       ),
                     )
-                  : Column(
-                      children: [
-                        const WordTile(),
-                        const SizedBox(height: 10),
-                        ButtonsRow(),
-                      ],
+                  : const FlexibleSpaceBar(
+                      background: Column(
+                        children: [
+                          WordTile(),
+                          SizedBox(height: 10),
+                          ButtonsRow(),
+                        ],
+                      ),
                     );
             },
           ),
         ),
+
+        // WordsList(),
+
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -60,30 +68,5 @@ class WordScreen extends StatelessWidget {
         ),
       ],
     );
-
-    // Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       const Expanded(flex: 4, child: WordsList()),
-    //       const WordTile(),
-    //       const SizedBox(height: 10),
-    //       Row(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: [
-    //           const LikeButton(),
-    //           const SizedBox(width: 10),
-    //           ElevatedButton(
-    //             onPressed: () {
-    //               wordController.getNext();
-    //             },
-    //             child: const Text('Next Word'),
-    //           ),
-    //         ],
-    //       ),
-    //       const Spacer(flex: 3),
-    //     ],
-    //   ),
-    // );
   }
 }
