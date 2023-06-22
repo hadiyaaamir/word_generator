@@ -31,12 +31,14 @@ class _WordScreenState extends State<WordScreen> {
     WordController wordController = context.watch<WordController>();
     wordController.wordListKey = _listKey;
 
+    ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return CustomScrollView(
       controller: _scrollController,
       reverse: true,
       slivers: [
         SliverAppBar(
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          backgroundColor: colorScheme.surfaceVariant,
           expandedHeight: MediaQuery.of(context).size.height / 2,
           pinned: true,
           snap: true,
@@ -50,9 +52,12 @@ class _WordScreenState extends State<WordScreen> {
                   ? Align(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        onPressed: _scrollDown,
-                        child: const Text('Generate Word'),
-                      ),
+                          onPressed: _scrollDown,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: colorScheme.primary,
+                            foregroundColor: colorScheme.onPrimary,
+                          ),
+                          child: const Text('Generate Word')),
                     )
                   : const FlexibleSpaceBar(
                       background: Column(
