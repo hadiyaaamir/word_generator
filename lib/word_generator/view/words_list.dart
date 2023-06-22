@@ -18,19 +18,22 @@ class _WordsListState extends State<WordsList> {
 
     List<Word> words = wordController.previousWords;
 
-    return SliverAnimatedList(
-      key: _listKey,
-      // reverse: true,
-      initialItemCount: words.length,
-      itemBuilder: (context, index, animation) {
-        return SizeTransition(
-          sizeFactor: animation,
-          child: SmallWordTile(
-            word: words[index],
-            key: Key('${words[index].word}'),
-          ),
-        );
-      },
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      sliver: SliverAnimatedList(
+        key: _listKey,
+        // reverse: true,
+        initialItemCount: words.length,
+        itemBuilder: (context, index, animation) {
+          return SizeTransition(
+            sizeFactor: animation,
+            child: SmallWordTile(
+              word: words[index],
+              key: Key('${words[index].word}'),
+            ),
+          );
+        },
+      ),
     );
   }
 }
