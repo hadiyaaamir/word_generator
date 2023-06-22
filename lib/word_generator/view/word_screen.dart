@@ -46,28 +46,42 @@ class _WordScreenState extends State<WordScreen> {
           flexibleSpace: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               final bool isCollapsed = constraints.maxHeight <=
-                  kToolbarHeight + (MediaQuery.of(context).padding.top);
+                  kToolbarHeight +
+                      (MediaQuery.of(context).padding.top) +
+                      (MediaQuery.of(context).size.height / 6);
 
-              return isCollapsed
-                  ? Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                          onPressed: _scrollDown,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: colorScheme.primary,
-                            foregroundColor: colorScheme.onPrimary,
-                          ),
-                          child: const Text('Generate Word')),
-                    )
-                  : const FlexibleSpaceBar(
-                      background: Column(
-                        children: [
-                          WordTile(),
-                          SizedBox(height: 10),
-                          ButtonsRow(),
-                        ],
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 750),
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: SizeTransition(
+                      sizeFactor: animation,
+                      child: child,
+                    ),
+                  );
+                },
+                child: isCollapsed
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                            onPressed: _scrollDown,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: colorScheme.primary,
+                              foregroundColor: colorScheme.onPrimary,
+                            ),
+                            child: const Text('Generate Word')),
+                      )
+                    : const FlexibleSpaceBar(
+                        background: Column(
+                          children: [
+                            WordTile(),
+                            SizedBox(height: 10),
+                            ButtonsRow(),
+                          ],
+                        ),
                       ),
-                    );
+              );
             },
           ),
         ),
