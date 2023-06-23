@@ -11,3 +11,5 @@ part 'word_screen_alternate.dart';
 part 'small_word_tile.dart';
 part 'word_generator.dart';
 part 'word_view_alternate.dart';
+part 'word_generator_alternate.dart';
+part 'word_generator_bottom_alternate.dart';

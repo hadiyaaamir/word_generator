@@ -31,9 +31,6 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
 
   @override
   Widget build(BuildContext context) {
-    bool collapseContainer =
-        context.watch<ScrollingNotifierController>().collapseContainer;
-
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         context
@@ -49,40 +46,10 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
             slivers: [
               const SliverFillRemaining(),
               const WordsList(reverseList: true),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: AnimatedFadeAndSize(
-                    duration: 750,
-                    child: !collapseContainer
-                        ? Column(
-                            children: [
-                              const WordTile(),
-                              const SizedBox(height: 10),
-                              ButtonsRow(
-                                  scrollOnNext: true,
-                                  scrollController: _scrollController),
-                            ],
-                          )
-                        : const SizedBox(),
-                  ),
-                ),
-              ),
+              WordGeneratorAlternate(scrollController: _scrollController),
             ],
           ),
-          AnimatedFadeAndSize(
-            duration: 900,
-            child: collapseContainer
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: GenerateWordButton(
-                      scrollController: _scrollController,
-                      alignment: Alignment.bottomCenter,
-                      reverseScroll: true,
-                    ),
-                  )
-                : const SizedBox(),
-          ),
+          WordGeneratorBottomAlternate(scrollController: _scrollController),
         ],
       ),
     );
