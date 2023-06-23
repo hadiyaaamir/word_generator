@@ -24,7 +24,7 @@ class ButtonsRow extends StatelessWidget {
             if (scrollOnNext && scrollController != null) {
               scrollController!.animateTo(
                 scrollController!.position.maxScrollExtent,
-                duration: const Duration(milliseconds: 100),
+                duration: const Duration(milliseconds: 500),
                 curve: Curves.easeInOut,
               );
             }

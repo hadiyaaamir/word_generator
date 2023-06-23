@@ -13,7 +13,7 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
 
   void _scrollDown() {
     _scrollController.animateTo(
-      _scrollController.position.minScrollExtent,
+      _scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
@@ -39,15 +39,15 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
   }
 
   void _handleScrollNotification(ScrollNotification notification) {
-    final collapsePosition = _scrollController.position.viewportDimension -
-        MediaQuery.of(context).size.height / 2;
+    final collapsePosition = _scrollController.position.maxScrollExtent -
+        MediaQuery.of(context).size.height / 4;
 
     final double currentPixels = notification.metrics.pixels;
 
-    if (currentPixels < collapsePosition && !collapseContainer) {
+    if (currentPixels <= collapsePosition && !collapseContainer) {
       setState(() => collapseContainer = true);
       print('collapse container: $collapseContainer');
-    } else if (currentPixels >= collapsePosition && collapseContainer) {
+    } else if (currentPixels > collapsePosition && collapseContainer) {
       setState(() => collapseContainer = false);
       print('collapse container: $collapseContainer');
     }
@@ -62,27 +62,42 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
         _handleScrollNotification(notification);
         return false;
       },
-      child: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          // const SliverFillRemaining(),
-          const WordsList(),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
-              child: Column(
-                children: [
-                  if (!collapseContainer) ...[
-                    const WordTile(),
-                    const SizedBox(height: 10),
-                    ButtonsRow(
-                        scrollOnNext: true,
-                        scrollController: _scrollController),
-                  ],
-                ],
+      child: Stack(
+        children: [
+          CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              // const SliverFillRemaining(),
+              const WordsList(),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Column(
+                    children: [
+                      if (!collapseContainer) ...[
+                        const WordTile(),
+                        const SizedBox(height: 10),
+                        ButtonsRow(
+                            scrollOnNext: true,
+                            scrollController: _scrollController),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (collapseContainer)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Generate Word'),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
