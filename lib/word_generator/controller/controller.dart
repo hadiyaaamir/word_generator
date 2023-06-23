@@ -4,3 +4,4 @@ import 'package:word_generator/favourites/favourites.dart';
 import 'package:word_generator/word_generator/word_generator.dart';
 
 part 'word_controller.dart';
+part 'scrolling_notifier_controller.dart';
