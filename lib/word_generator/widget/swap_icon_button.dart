@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of 'widget.dart';
 
 class SwapWordIconButton extends StatelessWidget {
   const SwapWordIconButton({super.key});

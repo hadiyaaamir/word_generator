@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of 'widget.dart';
 
 class NextButton extends StatelessWidget {
   const NextButton({

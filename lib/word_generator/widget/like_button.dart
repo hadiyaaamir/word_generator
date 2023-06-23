@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of 'widget.dart';
 
 class LikeButton extends StatefulWidget {
   const LikeButton({super.key});

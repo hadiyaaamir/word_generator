@@ -1,4 +1,4 @@
-part of 'widgets.dart';
+part of 'widget.dart';
 
 class CurrentWord extends StatelessWidget {
   const CurrentWord({super.key});
