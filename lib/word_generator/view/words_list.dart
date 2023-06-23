@@ -1,7 +1,9 @@
 part of 'view.dart';
 
 class WordsList extends StatefulWidget {
-  const WordsList({super.key});
+  const WordsList({super.key, this.reverseList = false});
+
+  final bool reverseList;
 
   @override
   State<WordsList> createState() => _WordsListState();
@@ -16,7 +18,9 @@ class _WordsListState extends State<WordsList> {
     final WordController wordController = context.watch<WordController>();
     wordController.wordListKey = _listKey;
 
-    List<Word> words = wordController.previousWords;
+    List<Word> words = widget.reverseList
+        ? wordController.previousWords.reversed.toList()
+        : wordController.previousWords;
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 10),

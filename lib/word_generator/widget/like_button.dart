@@ -1,4 +1,4 @@
-part of 'view.dart';
+part of 'widget.dart';
 
 class LikeButton extends StatefulWidget {
   const LikeButton({super.key});
@@ -17,8 +17,7 @@ class _LikeButtonState extends State<LikeButton> {
         onPressed: () {
           context.read<WordController>().toggleCurrentFavourite();
         },
-        icon: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 400),
+        icon: AnimatedFader(
           child: isFav
               ? const Icon(Icons.favorite, key: Key('favourite icon'))
               : const Icon(Icons.favorite_border, key: Key('unfavourite icon')),
