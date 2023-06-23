@@ -3,10 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:word_generator/widgets/widgets.dart';
 import 'package:word_generator/word_generator/word_generator.dart';
 
-part 'word_tile.dart';
-part 'word_screen.dart';
-part 'words_list.dart';
-part 'buttons_row.dart';
-part 'word_screen_alternate.dart';
-part 'small_word_tile.dart';
-part 'word_generator.dart';
+part 'next_button.dart';
+part 'like_button.dart';
+part 'current_word.dart';
+part 'swap_icon_button.dart';
+part 'generate_word_button.dart';

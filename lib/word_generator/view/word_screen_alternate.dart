@@ -86,14 +86,12 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
             ],
           ),
           if (collapseContainer)
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Generate Word'),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: GenerateWordButton(
+                scrollController: _scrollController,
+                alignment: Alignment.bottomCenter,
+                reverseScroll: true,
               ),
             ),
         ],
