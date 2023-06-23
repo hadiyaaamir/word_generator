@@ -67,8 +67,8 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
           CustomScrollView(
             controller: _scrollController,
             slivers: [
-              // const SliverFillRemaining(),
-              const WordsList(),
+              const SliverFillRemaining(),
+              const WordsList(reverseList: true),
               SliverToBoxAdapter(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height / 2,
