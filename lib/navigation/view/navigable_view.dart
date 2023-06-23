@@ -18,8 +18,7 @@ class NavigableView extends StatelessWidget {
         ? Column(
             children: [
               Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
+                child: AnimatedFader(
                   child: navigationController.currentPage,
                 ),
               ),
@@ -32,8 +31,7 @@ class NavigableView extends StatelessWidget {
                 child: CustomNavigationRail(extended: extended),
               ),
               Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
+                child: AnimatedFader(
                   child: navigationController.currentPage,
                 ),
               ),

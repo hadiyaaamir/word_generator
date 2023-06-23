@@ -55,8 +55,6 @@ class _WordScreenAlternateState extends State<WordScreenAlternate> {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         _handleScrollNotification(notification);

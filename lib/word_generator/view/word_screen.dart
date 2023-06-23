@@ -50,17 +50,8 @@ class _WordScreenState extends State<WordScreen> {
                       (MediaQuery.of(context).padding.top) +
                       (MediaQuery.of(context).size.height / 6);
 
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 750),
-                transitionBuilder: (child, animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: SizeTransition(
-                      sizeFactor: animation,
-                      child: child,
-                    ),
-                  );
-                },
+              return AnimatedFadeAndSize(
+                duration: 750,
                 child: isCollapsed
                     ? Align(
                         alignment: Alignment.center,

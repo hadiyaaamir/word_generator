@@ -15,58 +15,15 @@ class WordTile extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: AnimatedSize(
-                duration: const Duration(milliseconds: 500),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return ScaleTransition(
-                      scale: animation,
-                      child: FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: Wrap(
-                    key: Key('${word.isSwitched}'),
-                    children: [
-                      Text(
-                        word.word.first.toLowerCase(),
-                        style:
-                            Theme.of(context).textTheme.displaySmall!.copyWith(
-                                  color: colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                      ),
-                      Text(
-                        word.word.second.toLowerCase(),
-                        style:
-                            Theme.of(context).textTheme.displaySmall!.copyWith(
-                                  color: colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                      ),
-                    ],
-                  ),
+              child: AnimatedSizer(
+                child: AnimatedScaleAndFade(
+                  child: CurrentWord(key: Key('${word.isSwitched}')),
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
               right: 0,
-              child: IconButton(
-                onPressed: word.isSwitched
-                    ? null
-                    : () => context.read<WordController>().swapWords(),
-                icon: Icon(
-                  Icons.swap_horiz,
-                  size: 17,
-                  color: word.isSwitched
-                      ? colorScheme.outline
-                      : colorScheme.onPrimary,
-                ),
-              ),
+              child: SwapWordIconButton(),
             ),
           ],
         ),
