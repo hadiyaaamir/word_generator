@@ -4,10 +4,22 @@ class ScrollingNotifierController extends ChangeNotifier {
   bool _collapseContainer = false;
   bool get collapseContainer => _collapseContainer;
 
-  // set collapseContainer(bool collapse) {
-  //   _collapseContainer = collapse;
-  //   notifyListeners();
-  // }
+  double getSizedBoxHeight({
+    required BuildContext context,
+  }) {
+    int listSize = context.watch<WordController>().previousWords.length;
+
+    double navBarHeight = context.watch<NavigationController>().isBottomBar
+        ? kBottomNavBarHeight
+        : 0;
+    double listHeight = (kWordHeight * listSize) + 20;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double containerHeight = screenHeight / 2;
+    double remainingHeight =
+        screenHeight - containerHeight - listHeight - navBarHeight;
+
+    return remainingHeight;
+  }
 
   void handleScrollNotification(ScrollNotification notification,
       ScrollController scrollController, context) {

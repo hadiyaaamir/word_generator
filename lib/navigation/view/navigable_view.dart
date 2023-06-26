@@ -1,20 +1,24 @@
 part of 'view.dart';
 
-class NavigableView extends StatelessWidget {
+class NavigableView extends StatefulWidget {
   const NavigableView({
     super.key,
-    this.extended = false,
-    this.bottomBar = false,
+    required this.screenWidth,
   });
 
-  final bool extended;
-  final bool bottomBar;
+  final double screenWidth;
 
+  @override
+  State<NavigableView> createState() => _NavigableViewState();
+}
+
+class _NavigableViewState extends State<NavigableView> {
   @override
   Widget build(BuildContext context) {
     NavigationController navigationController =
         context.watch<NavigationController>();
-    return bottomBar
+
+    return navigationController.isBottomBar
         ? Column(
             children: [
               Expanded(
@@ -28,7 +32,9 @@ class NavigableView extends StatelessWidget {
         : Row(
             children: [
               SafeArea(
-                child: CustomNavigationRail(extended: extended),
+                child: CustomNavigationRail(
+                  extended: navigationController.isExtended,
+                ),
               ),
               Expanded(
                 child: AnimatedFader(

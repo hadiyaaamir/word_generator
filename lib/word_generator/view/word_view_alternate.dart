@@ -14,6 +14,21 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
+  // double _getRemainingHeight() {
+  //   int listSize = context.watch<WordController>().previousWords.length;
+
+  //   double navBarHeight = context.watch<NavigationController>().isBottomBar
+  //       ? kBottomNavBarHeight
+  //       : 0;
+  //   double listHeight = (kWordHeight * listSize) + 20;
+  //   double screenHeight = MediaQuery.of(context).size.height;
+  //   double containerHeight = screenHeight / 2;
+  //   double remainingHeight =
+  //       screenHeight - containerHeight - listHeight - navBarHeight;
+
+  //   return remainingHeight;
+  // }
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +46,10 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
 
   @override
   Widget build(BuildContext context) {
+    double sizedBoxHeight = context
+        .read<ScrollingNotifierController>()
+        .getSizedBoxHeight(context: context);
+
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         context
@@ -42,10 +61,13 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
       child: Stack(
         children: [
           CustomScrollView(
-            // anchor: 0.4,
             controller: _scrollController,
             slivers: [
-              // const SliverFillRemaining(),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: sizedBoxHeight > 0 ? sizedBoxHeight : 0,
+                ),
+              ),
               const WordsList(reverseList: true),
               WordGeneratorAlternate(scrollController: _scrollController),
             ],
