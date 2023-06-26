@@ -17,7 +17,7 @@ class WordGeneratorAlternate extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 2,
         child: AnimatedFadeAndSize(
-          duration: 750,
+          duration: const Duration(milliseconds: 750),
           child: !collapseContainer
               ? Column(
                   children: [

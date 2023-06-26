@@ -4,16 +4,16 @@ class AnimatedSizer extends StatelessWidget {
   const AnimatedSizer({
     super.key,
     required this.child,
-    this.duration = 500,
+    this.duration = const Duration(milliseconds: 500),
   });
 
   final Widget child;
-  final int duration;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSize(
-      duration: Duration(milliseconds: duration),
+      duration: duration,
       child: child,
     );
   }

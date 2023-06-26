@@ -26,7 +26,7 @@ class WordGenerator extends StatelessWidget {
                   (MediaQuery.of(context).size.height / 6);
 
           return AnimatedFadeAndSize(
-            duration: 750,
+            duration: const Duration(milliseconds: 750),
             child: isCollapsed
                 ? GenerateWordButton(scrollController: _scrollController)
                 : const FlexibleSpaceBar(

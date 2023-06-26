@@ -42,9 +42,10 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
       child: Stack(
         children: [
           CustomScrollView(
+            // anchor: 0.4,
             controller: _scrollController,
             slivers: [
-              const SliverFillRemaining(),
+              // const SliverFillRemaining(),
               const WordsList(reverseList: true),
               WordGeneratorAlternate(scrollController: _scrollController),
             ],
