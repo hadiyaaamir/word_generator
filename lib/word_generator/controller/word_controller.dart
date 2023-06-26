@@ -16,6 +16,8 @@ class WordController extends ChangeNotifier {
 
   bool isFav(Word word) => word.isFavourite;
 
+  bool reverseList = false;
+
   GlobalKey? wordListKey;
   GlobalKey? favouriteListKey;
 
@@ -31,7 +33,9 @@ class WordController extends ChangeNotifier {
   void _addToWordsAnimatedList() {
     SliverAnimatedListState? animatedList =
         wordListKey?.currentState as SliverAnimatedListState?;
-    animatedList?.insertItem(_currentIndex);
+
+    animatedList?.insertItem(
+        reverseList ? previousWords.length - 1 - _currentIndex : _currentIndex);
   }
 
   void _removeFromFavouritesAnimatedList(int index) {

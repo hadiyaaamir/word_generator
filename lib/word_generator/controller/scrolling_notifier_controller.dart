@@ -30,11 +30,9 @@ class ScrollingNotifierController extends ChangeNotifier {
 
     if (currentPixels <= collapsePosition && !collapseContainer) {
       _collapseContainer = true;
-      print('collapse container: $collapseContainer');
       notifyListeners();
     } else if (currentPixels > collapsePosition && collapseContainer) {
       _collapseContainer = false;
-      print('collapse container: $collapseContainer');
       notifyListeners();
     }
   }

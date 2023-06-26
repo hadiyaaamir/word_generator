@@ -18,6 +18,8 @@ class _WordsListState extends State<WordsList> {
     final WordController wordController = context.watch<WordController>();
     wordController.wordListKey = _listKey;
 
+    wordController.reverseList = widget.reverseList;
+
     List<Word> words = widget.reverseList
         ? wordController.previousWords.reversed.toList()
         : wordController.previousWords;
@@ -26,7 +28,6 @@ class _WordsListState extends State<WordsList> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       sliver: SliverAnimatedList(
         key: _listKey,
-        // reverse: true,
         initialItemCount: words.length,
         itemBuilder: (context, index, animation) {
           return SizeTransition(

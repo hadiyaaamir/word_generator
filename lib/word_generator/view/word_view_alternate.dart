@@ -14,21 +14,6 @@ class _WordViewAlternateState extends State<WordViewAlternate> {
     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
-  // double _getRemainingHeight() {
-  //   int listSize = context.watch<WordController>().previousWords.length;
-
-  //   double navBarHeight = context.watch<NavigationController>().isBottomBar
-  //       ? kBottomNavBarHeight
-  //       : 0;
-  //   double listHeight = (kWordHeight * listSize) + 20;
-  //   double screenHeight = MediaQuery.of(context).size.height;
-  //   double containerHeight = screenHeight / 2;
-  //   double remainingHeight =
-  //       screenHeight - containerHeight - listHeight - navBarHeight;
-
-  //   return remainingHeight;
-  // }
-
   @override
   void initState() {
     super.initState();
