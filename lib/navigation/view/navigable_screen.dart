@@ -19,7 +19,7 @@ class _NavigableScreenState extends State<NavigableScreen> {
         });
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-          body: NavigableView(screenWidth: constraints.maxWidth),
+          body: const NavigableView(),
         );
       },
     );

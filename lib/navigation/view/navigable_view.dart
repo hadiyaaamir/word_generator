@@ -1,18 +1,10 @@
 part of 'view.dart';
 
-class NavigableView extends StatefulWidget {
+class NavigableView extends StatelessWidget {
   const NavigableView({
     super.key,
-    required this.screenWidth,
   });
 
-  final double screenWidth;
-
-  @override
-  State<NavigableView> createState() => _NavigableViewState();
-}
-
-class _NavigableViewState extends State<NavigableView> {
   @override
   Widget build(BuildContext context) {
     NavigationController navigationController =
