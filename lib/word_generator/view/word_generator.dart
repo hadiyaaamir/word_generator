@@ -33,8 +33,8 @@ class WordGenerator extends StatelessWidget {
                     background: Column(
                       children: [
                         WordTile(),
-                        SizedBox(height: 10),
-                        ButtonsRow(),
+                        const SizedBox(height: 10),
+                        const ButtonsRow(),
                       ],
                     ),
                   ),

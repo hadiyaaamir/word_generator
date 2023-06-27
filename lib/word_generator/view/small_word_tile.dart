@@ -17,7 +17,12 @@ class SmallWordTile extends StatelessWidget {
                   Icons.favorite,
                   size: 10)
               : Container(key: ValueKey('${word.isFavourite}')),
-          label: Text(word.toString()),
+          label: Text(
+            word.toString(),
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.inverseSurface,
+                ),
+          ),
           onPressed: () {
             context.read<WordController>().toggleFavourite(word);
           },

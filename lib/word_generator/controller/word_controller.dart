@@ -12,20 +12,21 @@ class WordController extends ChangeNotifier {
   List<Word> get favourites =>
       _words.where((word) => word.isFavourite).toList();
 
-  bool get isCurrentFavourite => isFav(current);
-
-  bool isFav(Word word) => word.isFavourite;
+  bool get isCurrentFavourite => isFavourite(current);
+  bool isFavourite(Word word) => word.isFavourite;
 
   bool reverseList = false;
 
   GlobalKey? wordListKey;
   GlobalKey? favouriteListKey;
+  GlobalKey wordTileKey = GlobalKey();
 
   void getNext() {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
     _addToWordsAnimatedList();
+    _slideWordOffWordTile();
 
     notifyListeners();
   }
@@ -33,7 +34,6 @@ class WordController extends ChangeNotifier {
   void _addToWordsAnimatedList() {
     SliverAnimatedListState? animatedList =
         wordListKey?.currentState as SliverAnimatedListState?;
-
     animatedList?.insertItem(
         reverseList ? previousWords.length - 1 - _currentIndex : _currentIndex);
   }
@@ -45,6 +45,12 @@ class WordController extends ChangeNotifier {
       return SizeTransition(
           sizeFactor: animation, child: const TemporaryDeletionTile());
     }, duration: const Duration(milliseconds: 300));
+  }
+
+  void _slideWordOffWordTile() {
+    AnimatedSlidingOffWidgetState? wordTile =
+        wordTileKey.currentState as AnimatedSlidingOffWidgetState;
+    wordTile.slideOff();
   }
 
   void toggleCurrentFavourite() {
@@ -76,6 +82,7 @@ class WordController extends ChangeNotifier {
       _addToWordsAnimatedList();
       _words.insert(_currentIndex, current);
       current = current.swapWords();
+      _slideWordOffWordTile();
     }
     notifyListeners();
   }

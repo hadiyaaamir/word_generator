@@ -1,12 +1,18 @@
 part of 'view.dart';
 
-class WordTile extends StatelessWidget {
+class WordTile extends StatefulWidget {
   const WordTile({super.key});
 
   @override
+  State<WordTile> createState() => WordTileState();
+}
+
+class WordTileState extends State<WordTile>
+    with SingleTickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
-    Word word = context.watch<WordController>().current;
     var colorScheme = Theme.of(context).colorScheme;
+
     return GestureDetector(
       child: Card(
         color: colorScheme.primary,
@@ -17,7 +23,9 @@ class WordTile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
               child: AnimatedSizer(
                 child: AnimatedScaleAndFade(
-                  child: CurrentWord(key: Key('${word.isSwitched}')),
+                  child: AnimatedSlidingOffWidget(
+                    key: context.read<WordController>().wordTileKey,
+                  ),
                 ),
               ),
             ),
