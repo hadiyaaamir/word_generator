@@ -29,12 +29,14 @@ class WordGenerator extends StatelessWidget {
             duration: const Duration(milliseconds: 750),
             child: isCollapsed
                 ? GenerateWordButton(scrollController: _scrollController)
-                : const FlexibleSpaceBar(
+                : FlexibleSpaceBar(
                     background: Column(
                       children: [
-                        WordTile(),
-                        SizedBox(height: 10),
-                        ButtonsRow(),
+                        WordTile(
+                          key: context.read<WordController>().wordTileKey,
+                        ),
+                        const SizedBox(height: 10),
+                        const ButtonsRow(),
                       ],
                     ),
                   ),

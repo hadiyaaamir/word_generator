@@ -6,6 +6,8 @@ class WordController extends ChangeNotifier {
   Word get current => _words[_currentIndex];
   set current(Word word) => _words[_currentIndex] = word;
 
+  Word get previous => _words.length > 1 ? _words[1] : current;
+
   final List<Word> _words = [Word(word: WordPair.random())];
   List<Word> get previousWords => _words.sublist(1);
 
@@ -21,11 +23,14 @@ class WordController extends ChangeNotifier {
   GlobalKey? wordListKey;
   GlobalKey? favouriteListKey;
 
+  GlobalKey wordTileKey = GlobalKey();
+
   void getNext() {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
     _addToWordsAnimatedList();
+    _slideWordOffWordTile();
 
     notifyListeners();
   }
@@ -45,6 +50,11 @@ class WordController extends ChangeNotifier {
       return SizeTransition(
           sizeFactor: animation, child: const TemporaryDeletionTile());
     }, duration: const Duration(milliseconds: 300));
+  }
+
+  void _slideWordOffWordTile() {
+    WordTileState? wordTile = wordTileKey.currentState as WordTileState;
+    wordTile.slideOff();
   }
 
   void toggleCurrentFavourite() {
@@ -76,6 +86,7 @@ class WordController extends ChangeNotifier {
       _addToWordsAnimatedList();
       _words.insert(_currentIndex, current);
       current = current.swapWords();
+      _slideWordOffWordTile();
     }
     notifyListeners();
   }
