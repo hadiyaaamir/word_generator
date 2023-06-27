@@ -6,23 +6,19 @@ class WordController extends ChangeNotifier {
   Word get current => _words[_currentIndex];
   set current(Word word) => _words[_currentIndex] = word;
 
-  Word get previous => _words.length > 1 ? _words[1] : current;
-
   final List<Word> _words = [Word(word: WordPair.random())];
   List<Word> get previousWords => _words.sublist(1);
 
   List<Word> get favourites =>
       _words.where((word) => word.isFavourite).toList();
 
-  bool get isCurrentFavourite => isFav(current);
-
-  bool isFav(Word word) => word.isFavourite;
+  bool get isCurrentFavourite => isFavourite(current);
+  bool isFavourite(Word word) => word.isFavourite;
 
   bool reverseList = false;
 
   GlobalKey? wordListKey;
   GlobalKey? favouriteListKey;
-
   GlobalKey wordTileKey = GlobalKey();
 
   void getNext() {
@@ -38,7 +34,6 @@ class WordController extends ChangeNotifier {
   void _addToWordsAnimatedList() {
     SliverAnimatedListState? animatedList =
         wordListKey?.currentState as SliverAnimatedListState?;
-
     animatedList?.insertItem(
         reverseList ? previousWords.length - 1 - _currentIndex : _currentIndex);
   }

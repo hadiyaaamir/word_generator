@@ -25,29 +25,29 @@ class WordTileState extends State<WordTile>
     oldWord = context.read<WordController>().current;
 
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
 
-    _colorAnimation = ColorTween(
-      begin: Colors.white,
-      end: Colors.black,
-    ).animate(_animationController);
-
     _opacityAnimation = Tween<double>(
       begin: 1.0,
-      end: 0,
+      end: 0.7,
     ).animate(_animationController);
 
     _sizeAnimation = Tween<double>(
       begin: 35.0,
-      end: 8,
+      end: 10,
     ).animate(_animationController);
 
     _slideAnimation = Tween<double>(
       begin: 0.0,
-      end: -100.0,
-    ).animate(_animationController);
+      end: -55.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.3, 1.0, curve: Curves.easeOut),
+      ),
+    );
   }
 
   @override
@@ -71,9 +71,13 @@ class WordTileState extends State<WordTile>
     wordController.wordTileKey = widget.key as GlobalKey;
 
     Word word = wordController.current;
-    // Word oldWord = wordController.previous;
 
     var colorScheme = Theme.of(context).colorScheme;
+
+    _colorAnimation = ColorTween(
+      begin: colorScheme.onPrimary,
+      end: colorScheme.primary,
+    ).animate(_animationController);
 
     print('old word: $oldWord, new word: $word');
     return GestureDetector(
@@ -136,16 +140,6 @@ class WordTileState extends State<WordTile>
               right: 0,
               child: SwapWordIconButton(),
             ),
-            // IconButton(
-            //   onPressed: () {
-            //     slideOff();
-            //     context.read<WordController>().getNext();
-            //   },
-            //   icon: Icon(
-            //     Icons.move_up,
-            //     color: colorScheme.onPrimary,
-            //   ),
-            // )
           ],
         ),
       ),
