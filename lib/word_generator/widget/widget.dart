@@ -8,3 +8,4 @@ part 'like_button.dart';
 part 'current_word.dart';
 part 'swap_icon_button.dart';
 part 'generate_word_button.dart';
+part 'animated_sliding_off_word.dart';

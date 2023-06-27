@@ -48,7 +48,8 @@ class WordController extends ChangeNotifier {
   }
 
   void _slideWordOffWordTile() {
-    WordTileState? wordTile = wordTileKey.currentState as WordTileState;
+    AnimatedSlidingOffWidgetState? wordTile =
+        wordTileKey.currentState as AnimatedSlidingOffWidgetState;
     wordTile.slideOff();
   }
 

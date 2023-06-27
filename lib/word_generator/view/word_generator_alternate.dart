@@ -21,7 +21,7 @@ class WordGeneratorAlternate extends StatelessWidget {
           child: !collapseContainer
               ? Column(
                   children: [
-                    WordTile(key: context.read<WordController>().wordTileKey),
+                    const WordTile(),
                     const SizedBox(height: 10),
                     ButtonsRow(
                       scrollOnNext: true,
