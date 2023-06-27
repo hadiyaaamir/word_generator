@@ -35,7 +35,9 @@ class WordController extends ChangeNotifier {
     SliverAnimatedListState? animatedList =
         wordListKey?.currentState as SliverAnimatedListState?;
     animatedList?.insertItem(
-        reverseList ? previousWords.length - 1 - _currentIndex : _currentIndex);
+      reverseList ? previousWords.length - 1 - _currentIndex : _currentIndex,
+      duration: const Duration(milliseconds: 500),
+    );
   }
 
   void _removeFromFavouritesAnimatedList(int index) {
