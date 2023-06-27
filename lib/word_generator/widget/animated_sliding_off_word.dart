@@ -71,7 +71,7 @@ class AnimatedSlidingOffWidgetState extends State<AnimatedSlidingOffWidget>
 
     _colorAnimation = ColorTween(
       begin: colorScheme.onPrimary,
-      end: colorScheme.primary,
+      end: colorScheme.inverseSurface,
     ).animate(_animationController);
 
     _sizeAnimation = Tween<double>(
