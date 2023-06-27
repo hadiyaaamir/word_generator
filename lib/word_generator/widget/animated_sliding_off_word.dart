@@ -26,7 +26,7 @@ class AnimatedSlidingOffWidgetState extends State<AnimatedSlidingOffWidget>
     oldWord = context.read<WordController>().current;
 
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 350),
       vsync: this,
     );
 

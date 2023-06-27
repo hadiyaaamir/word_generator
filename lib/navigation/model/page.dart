@@ -14,9 +14,6 @@ class AppPage {
   factory AppPage.home() =>
       AppPage(page: const WordScreen(), label: 'Home', icon: Icons.home);
 
-  factory AppPage.home2() => AppPage(
-      page: const WordScreenAlternate(), label: 'Home 2', icon: Icons.home);
-
   factory AppPage.liked() => AppPage(
       page: const FavouritesScreen(), label: 'Liked', icon: Icons.favorite);
 }
