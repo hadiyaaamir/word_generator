@@ -22,7 +22,6 @@ class NavigationController extends ChangeNotifier {
 
   final List<AppPage> _pages = [
     AppPage.home(),
-    AppPage.home2(),
     AppPage.liked(),
   ];
   List<AppPage> get pages => _pages;
