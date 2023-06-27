@@ -17,18 +17,20 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
     NavigationController navigationController =
         context.watch<NavigationController>();
 
-    return BottomNavigationBar(
-      backgroundColor: colorScheme.onInverseSurface,
-      items: [
-        for (AppPage page in navigationController.pages)
-          BottomNavigationBarItem(
-            icon: Icon(page.icon),
-            label: page.label,
-          ),
-      ],
-      currentIndex: navigationController.selectedIndex,
-      onTap: (index) =>
-          context.read<NavigationController>().selectedIndex = index,
-    );
+    return SizedBox(
+        height: kBottomNavBarHeight,
+        child: BottomNavigationBar(
+          backgroundColor: colorScheme.onInverseSurface,
+          items: [
+            for (AppPage page in navigationController.pages)
+              BottomNavigationBarItem(
+                icon: Icon(page.icon),
+                label: page.label,
+              ),
+          ],
+          currentIndex: navigationController.selectedIndex,
+          onTap: (index) =>
+              context.read<NavigationController>().selectedIndex = index,
+        ));
   }
 }

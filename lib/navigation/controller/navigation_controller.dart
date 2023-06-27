@@ -8,6 +8,18 @@ class NavigationController extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isBottomBar = false;
+  bool get isBottomBar => _isBottomBar;
+
+  bool _isExtended = false;
+  bool get isExtended => _isExtended;
+
+  setNavBarType(double screenWidth) {
+    _isBottomBar = screenWidth < 450;
+    _isExtended = screenWidth >= 600;
+    notifyListeners();
+  }
+
   final List<AppPage> _pages = [
     AppPage.home(),
     AppPage.home2(),

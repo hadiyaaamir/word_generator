@@ -17,11 +17,7 @@ class NextButton extends StatelessWidget {
       onPressed: () {
         wordController.getNext();
         if (scrollOnNext && scrollController != null) {
-          scrollController!.animateTo(
-            scrollController!.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          );
+          scrollController!.jumpTo(scrollController!.position.maxScrollExtent);
         }
       },
       child: const Text('Next Word'),

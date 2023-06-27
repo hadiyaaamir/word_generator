@@ -12,12 +12,14 @@ class _NavigableScreenState extends State<NavigableScreen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context
+              .read<NavigationController>()
+              .setNavBarType(constraints.maxWidth);
+        });
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-          body: NavigableView(
-            extended: constraints.maxWidth >= 600,
-            bottomBar: constraints.maxWidth < 450,
-          ),
+          body: const NavigableView(),
         );
       },
     );

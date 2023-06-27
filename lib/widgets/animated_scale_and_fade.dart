@@ -4,16 +4,16 @@ class AnimatedScaleAndFade extends StatelessWidget {
   const AnimatedScaleAndFade({
     super.key,
     required this.child,
-    this.duration = 500,
+    this.duration = const Duration(milliseconds: 500),
   });
 
   final Widget child;
-  final int duration;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: Duration(milliseconds: duration),
+      duration: duration,
       transitionBuilder: (Widget child, Animation<double> animation) {
         return ScaleTransition(
           scale: animation,

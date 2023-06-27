@@ -7,16 +7,21 @@ class SmallWordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton.icon(
-        icon: word.isFavourite
-            ? Icon(
-                key: ValueKey('${word.isFavourite}'), Icons.favorite, size: 10)
-            : Container(key: ValueKey('${word.isFavourite}')),
-        label: Text(word.toString()),
-        onPressed: () {
-          context.read<WordController>().toggleFavourite(word);
-        },
+    return SizedBox(
+      height: kWordHeight,
+      child: Center(
+        child: TextButton.icon(
+          icon: word.isFavourite
+              ? Icon(
+                  key: ValueKey('${word.isFavourite}'),
+                  Icons.favorite,
+                  size: 10)
+              : Container(key: ValueKey('${word.isFavourite}')),
+          label: Text(word.toString()),
+          onPressed: () {
+            context.read<WordController>().toggleFavourite(word);
+          },
+        ),
       ),
     );
   }
