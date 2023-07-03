@@ -7,8 +7,6 @@ class FavouriteTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WordController wordController = context.watch<WordController>();
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 5, right: 35, left: 35),
       child: Card(

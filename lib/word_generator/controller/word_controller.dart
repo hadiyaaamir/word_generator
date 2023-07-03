@@ -15,7 +15,6 @@ class WordController extends ChangeNotifier {
   bool get isCurrentFavourite => isFavourite(current);
   bool isFavourite(Word word) => word.isFavourite;
 
-  GlobalKey? favouriteListKey;
   GlobalKey wordTileKey = GlobalKey();
 
   void getNext() {
@@ -25,15 +24,6 @@ class WordController extends ChangeNotifier {
     _slideWordOffWordTile();
 
     notifyListeners();
-  }
-
-  void _removeFromFavouritesAnimatedList(int index) {
-    AnimatedListState? animatedList =
-        favouriteListKey?.currentState as AnimatedListState?;
-    animatedList?.removeItem(index, (_, animation) {
-      return SizeTransition(
-          sizeFactor: animation, child: const TemporaryDeletionTile());
-    }, duration: const Duration(milliseconds: 300));
   }
 
   void _slideWordOffWordTile() {
@@ -50,20 +40,9 @@ class WordController extends ChangeNotifier {
   void toggleFavourite(Word word) {
     int index = _words.indexOf(word);
     if (index != -1) {
-      if (_words[index].isFavourite) _removeFavourites(word);
       _words[index] = word.toggleFavourite();
     }
     notifyListeners();
-  }
-
-  void _removeFavourites(Word word) {
-    List favouriteWord =
-        favourites.where((element) => element.word == word.word).toList();
-
-    if (favouriteWord.isNotEmpty) {
-      int favouriteIndex = favourites.indexOf(favouriteWord.first);
-      _removeFromFavouritesAnimatedList(favouriteIndex);
-    }
   }
 
   void swapWords() {

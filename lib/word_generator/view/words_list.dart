@@ -24,15 +24,23 @@ class _WordsListState extends State<WordsList> {
   }
 
   void _handleWordControllerChange() {
-    final Word addedWord = wordController.previousWords.first;
+    List previousWords = wordController.previousWords;
 
-    if (_words.isEmpty || addedWord.word != _words.first.word) {
-      _words.insert(0, addedWord);
-      final SliverAnimatedListState? animatedList = _listKey.currentState;
-      animatedList?.insertItem(0, duration: const Duration(milliseconds: 500));
-    } else if (addedWord.word == _words.first.word) {
-      setState(() => _words = wordController.previousWords);
+    if (previousWords.isNotEmpty) {
+      final Word addedWord = previousWords.first;
+
+      if (_words.isEmpty || addedWord.word != _words.first.word) {
+        _addWordToAnimateList(addedWord);
+      } else if (addedWord.word == _words.first.word) {
+        setState(() => _words = wordController.previousWords);
+      }
     }
+  }
+
+  void _addWordToAnimateList(Word addedWord) {
+    _words.insert(0, addedWord);
+    final SliverAnimatedListState? animatedList = _listKey.currentState;
+    animatedList?.insertItem(0, duration: const Duration(milliseconds: 500));
   }
 
   @override
