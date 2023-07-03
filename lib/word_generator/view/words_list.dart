@@ -11,7 +11,7 @@ class _WordsListState extends State<WordsList> {
   final GlobalKey<SliverAnimatedListState> _listKey =
       GlobalKey<SliverAnimatedListState>();
 
-  List<Word> _words = [];
+  final List<Word> _words = [];
 
   late final WordController wordController;
 
@@ -32,7 +32,10 @@ class _WordsListState extends State<WordsList> {
       if (_words.isEmpty || addedWord.word != _words.first.word) {
         _addWordToAnimateList(addedWord);
       } else if (addedWord.word == _words.first.word) {
-        setState(() => _words = wordController.previousWords);
+        setState(() {
+          _words.clear();
+          _words.addAll(wordController.previousWords);
+        });
       }
     }
   }
