@@ -5,24 +5,24 @@ class Word {
   const Word({
     required this.word,
     this.isFavourite = false,
-    this.isSwitched = false,
+    this.isSwapped = false,
   });
 
   final WordPair word;
   final bool isFavourite;
-  final bool isSwitched;
+  final bool isSwapped;
 
-  Word copyWith({WordPair? word, bool? isFavourite, bool? isSwitched}) => Word(
+  Word copyWith({WordPair? word, bool? isFavourite, bool? isSwapped}) => Word(
         word: word ?? this.word,
         isFavourite: isFavourite ?? this.isFavourite,
-        isSwitched: isSwitched ?? this.isSwitched,
+        isSwapped: isSwapped ?? this.isSwapped,
       );
 
   Word toggleFavourite() => copyWith(isFavourite: !isFavourite);
 
   Word swapWords() => copyWith(
         word: WordPair(word.second, word.first),
-        isSwitched: !isSwitched,
+        isSwapped: !isSwapped,
         isFavourite: false,
       );
 

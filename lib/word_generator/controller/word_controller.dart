@@ -78,7 +78,7 @@ class WordController extends ChangeNotifier {
   }
 
   void swapWords() {
-    if (!current.isSwitched) {
+    if (!current.isSwapped) {
       _addToWordsAnimatedList();
       _words.insert(_currentIndex, current);
       current = current.swapWords();

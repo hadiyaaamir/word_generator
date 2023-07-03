@@ -8,13 +8,13 @@ class SwapWordIconButton extends StatelessWidget {
     Word word = context.watch<WordController>().current;
     var colorScheme = Theme.of(context).colorScheme;
     return IconButton(
-      onPressed: word.isSwitched
+      onPressed: word.isSwapped
           ? null
           : () => context.read<WordController>().swapWords(),
       icon: Icon(
         Icons.swap_horiz,
         size: 17,
-        color: word.isSwitched ? colorScheme.outline : colorScheme.onPrimary,
+        color: word.isSwapped ? colorScheme.outline : colorScheme.onPrimary,
       ),
     );
   }

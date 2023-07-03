@@ -104,7 +104,7 @@ class AnimatedSlidingOffWidgetState extends State<AnimatedSlidingOffWidget>
               Opacity(
                 opacity: 1 - _opacityAnimation.value,
                 child: CurrentWord(
-                  key: Key('${word.isSwitched}'),
+                  key: Key('${word.isSwapped}'),
                   word: word,
                   textStyle: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: colorScheme.onPrimary,
