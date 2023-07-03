@@ -40,7 +40,6 @@ class WordController extends ChangeNotifier {
     if (!current.isSwapped) {
       _words.insert(_currentIndex, current);
       current = current.swapWords();
-      // _slideWordOffWordTile();
     }
     notifyListeners();
   }
