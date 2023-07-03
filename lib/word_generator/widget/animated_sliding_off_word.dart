@@ -19,11 +19,15 @@ class AnimatedSlidingOffWidgetState extends State<AnimatedSlidingOffWidget>
   late Animation<double> _sizeAnimation;
   late Animation<double> _slideAnimation;
 
+  late final WordController wordController;
+
   @override
   void initState() {
     super.initState();
 
-    oldWord = context.read<WordController>().current;
+    wordController = context.read<WordController>();
+    oldWord = wordController.current;
+    wordController.addListener(slideOff);
 
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 350),
@@ -48,17 +52,20 @@ class AnimatedSlidingOffWidgetState extends State<AnimatedSlidingOffWidget>
 
   @override
   void dispose() {
+    wordController.removeListener(slideOff);
     _animationController.dispose();
     super.dispose();
   }
 
   void slideOff() {
-    _animationController.forward().then((_) {
-      setState(() {
-        oldWord = context.read<WordController>().current;
+    if (wordController.current.word != oldWord.word) {
+      _animationController.forward().then((_) {
+        setState(() {
+          oldWord = context.read<WordController>().current;
+        });
+        _animationController.reset();
       });
-      _animationController.reset();
-    });
+    }
   }
 
   @override

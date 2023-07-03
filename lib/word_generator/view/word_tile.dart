@@ -43,11 +43,11 @@ class AnimatedWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedSizer(
+    return const AnimatedSizer(
       child: AnimatedScaleAndFade(
         child: AnimatedSlidingOffWidget(
-          key: context.read<WordController>().wordTileKey,
-        ),
+            // key: context.read<WordController>().wordTileKey,
+            ),
       ),
     );
   }

@@ -15,21 +15,12 @@ class WordController extends ChangeNotifier {
   bool get isCurrentFavourite => isFavourite(current);
   bool isFavourite(Word word) => word.isFavourite;
 
-  GlobalKey wordTileKey = GlobalKey();
-
   void getNext() {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
-    _slideWordOffWordTile();
 
     notifyListeners();
-  }
-
-  void _slideWordOffWordTile() {
-    AnimatedSlidingOffWidgetState? wordTile =
-        wordTileKey.currentState as AnimatedSlidingOffWidgetState;
-    wordTile.slideOff();
   }
 
   void toggleCurrentFavourite() {
@@ -49,7 +40,7 @@ class WordController extends ChangeNotifier {
     if (!current.isSwapped) {
       _words.insert(_currentIndex, current);
       current = current.swapWords();
-      _slideWordOffWordTile();
+      // _slideWordOffWordTile();
     }
     notifyListeners();
   }
