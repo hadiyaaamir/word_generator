@@ -10,8 +10,6 @@ class WordScreen extends StatefulWidget {
 class _WordScreenState extends State<WordScreen> {
   final ScrollController _scrollController = ScrollController();
 
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-
   @override
   void dispose() {
     super.dispose();
@@ -20,9 +18,6 @@ class _WordScreenState extends State<WordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    WordController wordController = context.watch<WordController>();
-    wordController.wordListKey = _listKey;
-
     return CustomScrollView(
       controller: _scrollController,
       reverse: true,

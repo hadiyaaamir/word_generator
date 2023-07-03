@@ -7,8 +7,7 @@ class WordTile extends StatefulWidget {
   State<WordTile> createState() => WordTileState();
 }
 
-class WordTileState extends State<WordTile>
-    with SingleTickerProviderStateMixin {
+class WordTileState extends State<WordTile> {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
@@ -17,19 +16,13 @@ class WordTileState extends State<WordTile>
       child: Card(
         color: colorScheme.primary,
         elevation: 3,
-        child: Stack(
+        child: const Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: AnimatedSizer(
-                child: AnimatedScaleAndFade(
-                  child: AnimatedSlidingOffWidget(
-                    key: context.read<WordController>().wordTileKey,
-                  ),
-                ),
-              ),
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              child: AnimatedWord(),
             ),
-            const Positioned(
+            Positioned(
               right: 0,
               child: SwapWordIconButton(),
             ),
@@ -39,6 +32,23 @@ class WordTileState extends State<WordTile>
       onDoubleTap: () {
         context.read<WordController>().toggleCurrentFavourite();
       },
+    );
+  }
+}
+
+class AnimatedWord extends StatelessWidget {
+  const AnimatedWord({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const AnimatedSizer(
+      child: AnimatedScaleAndFade(
+        child: AnimatedSlidingOffWidget(
+            // key: context.read<WordController>().wordTileKey,
+            ),
+      ),
     );
   }
 }

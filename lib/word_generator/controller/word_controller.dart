@@ -15,42 +15,12 @@ class WordController extends ChangeNotifier {
   bool get isCurrentFavourite => isFavourite(current);
   bool isFavourite(Word word) => word.isFavourite;
 
-  GlobalKey? wordListKey;
-  GlobalKey? favouriteListKey;
-  GlobalKey wordTileKey = GlobalKey();
-
   void getNext() {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
-    _addToWordsAnimatedList();
-    _slideWordOffWordTile();
 
     notifyListeners();
-  }
-
-  void _addToWordsAnimatedList() {
-    SliverAnimatedListState? animatedList =
-        wordListKey?.currentState as SliverAnimatedListState?;
-    animatedList?.insertItem(
-      _currentIndex,
-      duration: const Duration(milliseconds: 500),
-    );
-  }
-
-  void _removeFromFavouritesAnimatedList(int index) {
-    AnimatedListState? animatedList =
-        favouriteListKey?.currentState as AnimatedListState?;
-    animatedList?.removeItem(index, (_, animation) {
-      return SizeTransition(
-          sizeFactor: animation, child: const TemporaryDeletionTile());
-    }, duration: const Duration(milliseconds: 300));
-  }
-
-  void _slideWordOffWordTile() {
-    AnimatedSlidingOffWidgetState? wordTile =
-        wordTileKey.currentState as AnimatedSlidingOffWidgetState;
-    wordTile.slideOff();
   }
 
   void toggleCurrentFavourite() {
@@ -61,28 +31,16 @@ class WordController extends ChangeNotifier {
   void toggleFavourite(Word word) {
     int index = _words.indexOf(word);
     if (index != -1) {
-      if (_words[index].isFavourite) _removeFavourites(word);
       _words[index] = word.toggleFavourite();
     }
     notifyListeners();
   }
 
-  void _removeFavourites(Word word) {
-    List favouriteWord =
-        favourites.where((element) => element.word == word.word).toList();
-
-    if (favouriteWord.isNotEmpty) {
-      int favouriteIndex = favourites.indexOf(favouriteWord.first);
-      _removeFromFavouritesAnimatedList(favouriteIndex);
-    }
-  }
-
   void swapWords() {
-    if (!current.isSwitched) {
-      _addToWordsAnimatedList();
+    if (!current.isSwapped) {
       _words.insert(_currentIndex, current);
       current = current.swapWords();
-      _slideWordOffWordTile();
+      // _slideWordOffWordTile();
     }
     notifyListeners();
   }
