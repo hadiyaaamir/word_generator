@@ -15,7 +15,6 @@ class WordController extends ChangeNotifier {
   bool get isCurrentFavourite => isFavourite(current);
   bool isFavourite(Word word) => word.isFavourite;
 
-  GlobalKey? wordListKey;
   GlobalKey? favouriteListKey;
   GlobalKey wordTileKey = GlobalKey();
 
@@ -23,19 +22,9 @@ class WordController extends ChangeNotifier {
     WordPair currentWord = WordPair.random();
 
     _words.insert(_currentIndex, Word(word: currentWord));
-    _addToWordsAnimatedList();
     _slideWordOffWordTile();
 
     notifyListeners();
-  }
-
-  void _addToWordsAnimatedList() {
-    SliverAnimatedListState? animatedList =
-        wordListKey?.currentState as SliverAnimatedListState?;
-    animatedList?.insertItem(
-      _currentIndex,
-      duration: const Duration(milliseconds: 500),
-    );
   }
 
   void _removeFromFavouritesAnimatedList(int index) {
@@ -79,7 +68,6 @@ class WordController extends ChangeNotifier {
 
   void swapWords() {
     if (!current.isSwapped) {
-      _addToWordsAnimatedList();
       _words.insert(_currentIndex, current);
       current = current.swapWords();
       _slideWordOffWordTile();
